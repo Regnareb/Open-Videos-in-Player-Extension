@@ -1,26 +1,24 @@
-# YouTube Link Launcher
+# yt-dlp Link Launcher
+
+Clicking a link to a video on any site yt-dlp supports opens it in your local program
+via a custom URL scheme (default: `ytplayer://open?url=<encoded URL>`).
 
 ## Install
-1. Go to chrome://extensions and enable Developer mode.
-2. Click "Load unpacked" and select this folder.
-3. Open the extension's Details > Extension options to set your URL scheme template
-   (default: `ytplayer://open?url={url}`).
+1. chrome://extensions > enable Developer mode > Load unpacked > select this folder.
+2. Open the extension's options to set the URL template, sites to ignore, and whether
+   playlists/channels/profiles should be caught too.
 
-## Register your custom scheme (example: Windows)
-Save as `ytplayer.reg` (edit the path to your program) and double-click it:
+## How matching works
+`patterns.js` holds URL patterns taken from yt-dlp's extractors (generated from yt-dlp 2026.08.19).
+Links are matched against them on click. Alt+click opens a link normally.
 
-    Windows Registry Editor Version 5.00
-    [HKEY_CURRENT_USER\Software\Classes\ytplayer]
-    @="URL:ytplayer Protocol"
-    "URL Protocol"=""
-    [HKEY_CURRENT_USER\Software\Classes\ytplayer\shell\open\command]
-    @="\"C:\\Path\\To\\YourProgram.exe\" \"%1\""
+To refresh the list after updating yt-dlp:
 
-Your program receives e.g. `ytplayer://open?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXXXXXXXXXXX`.
+    pip install -U yt-dlp
+    python3 tools/generate_patterns.py
 
-macOS: declare the scheme in your app's Info.plist (CFBundleURLTypes).
-Linux: add `MimeType=x-scheme-handler/ytplayer;` to a .desktop file, then run
-`xdg-mime default yourapp.desktop x-scheme-handler/ytplayer`.
+Patterns that can't be translated to JavaScript, or that are so broad they match ordinary
+sites, are dropped. YouTube and Vimeo use hand-written patterns for the same reason.
 
-Chrome will ask once for permission to open the external app; tick "Always allow".
-Alt+click opens a link normally.
+## Windows
+See ytplayer.reg and launch.ps1 (copy launch.ps1 to C:\ytplayer\).

@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Classes\ytplayer]
+@="URL:YouTube Player Protocol"
+"URL Protocol"=""
+
+[HKEY_CURRENT_USER\Software\Classes\ytplayer\DefaultIcon]
+@="C:\\Program Files\\MPC-HC\\mpc-hc64.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\ytplayer\shell]
+
+[HKEY_CURRENT_USER\Software\Classes\ytplayer\shell\open]
+
+[HKEY_CURRENT_USER\Software\Classes\ytplayer\shell\open\command]
+@="powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File \"C:\\ytplayer\\launch.ps1\" \"%1\""

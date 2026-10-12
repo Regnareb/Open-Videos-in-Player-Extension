@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Link Launcher",
-  "version": "1.0.0",
-  "description": "Rewrites clicked YouTube video links into a custom URL scheme that opens a local program.",
+  "name": "yt-dlp Link Launcher",
+  "version": "2.0.0",
+  "description": "Rewrites clicked video links from any site yt-dlp supports into a custom URL scheme that opens a local program.",
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["patterns.js", "content.js"],
       "run_at": "document_start",
       "all_frames": true
     }
