@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Link Launcher",
+  "version": "1.0.0",
+  "description": "Rewrites clicked YouTube video links into a custom URL scheme that opens a local program.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}
